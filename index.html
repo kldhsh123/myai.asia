@@ -43,7 +43,7 @@
             font-size: 24px;
             margin-bottom: 10px;
             color: #333333;
-            font-weight: bold; /* 加粗 */
+            font-weight: bold; 
         }
         #time-difference {
             font-size: 18px;
@@ -71,7 +71,7 @@
         .buttons {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center; /* 按钮居中 */
+            justify-content: center; 
         }
         .button {
             background-color: rgba(255, 255, 255, 0.7);
@@ -118,10 +118,10 @@
             var isRedirectSet = localStorage.getItem('redirectToMainSite');
             if (isRedirectSet === 'true') {
                 document.getElementById('rememberRedirect').checked = true;
-                delayedRedirect(); // 如果已经勾选，则延迟跳转
+                delayedRedirect(); // 如果已经勾选，则延迟2秒跳转
             }
 
-            // 添加延迟跳转和检查用户取消自动跳转
+            // 检测部分
             var redirectTimeout;
             function delayedRedirect() {
                 redirectTimeout = setTimeout(function() {
@@ -162,6 +162,7 @@
         <div class="buttons">
             <div class="button" onclick="location.href='https://chat-1.myai.asia/'">主用站(稳定)</div>
             <div class="button" onclick="location.href='https://chat-1-0.myai.asia/'">主用站(备用)</div>
+            <div class="button" onclick="location.href='https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=vFOh8aTsWPbQsv7ckU8-Rih9w-N6PFom&authKey=uzWNwmUSGD32aKVIGINOAcDrx0BC2I7uPz1mIMsM%2B5yygh8FIrDh7DMkRFQV2j4x8&noverify=0&group_code=330316577'">加入Q群</div>
             <div class="button" onclick="location.href='https://chat-2.myai.asia/'">测试站点(随时停止)</div>
         </div>
         <div class="test-text">
