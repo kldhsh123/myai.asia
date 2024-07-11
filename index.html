@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>开朗科技网络工作室创建时间</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-image: url('https://cdn.kldhsh.top/neko/NEKO.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            width: 90%;
+            max-width: 400px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .time-container, .test-text, .buttons {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333333;
+            font-weight: bold; /* 加粗 */
+        }
+        #time-difference {
+            font-size: 18px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-bottom: 5px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .test-text {
+            margin-bottom: 20px;
+        }
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* 按钮居中 */
+        }
+        .button {
+            background-color: rgba(255, 255, 255, 0.7);
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+    </style>
+    <script src="https://cdn.staticfile.net/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function updateTimeDifference() {
+                var studioCreatedDate = new Date('2024-05-21');
+                var currentDate = new Date();
+                var timeDiff = currentDate - studioCreatedDate;
+
+                var years = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 365));
+                timeDiff -= years * (1000 * 60 * 60 * 24 * 365);
+                var months = Math.floor(timeDiff / (1000 * 60 * 60 * 24 * 30));
+                timeDiff -= months * (1000 * 60 * 60 * 24 * 30);
+                var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                timeDiff -= days * (1000 * 60 * 60 * 24);
+                var hours = Math.floor(timeDiff / (1000 * 60 * 60));
+                timeDiff -= hours * (1000 * 60 * 60);
+                var minutes = Math.floor(timeDiff / (1000 * 60));
+                timeDiff -= minutes * (1000 * 60);
+                var seconds = Math.floor(timeDiff / 1000);
+
+                $('#time-difference').text(' ' + years + ' 年  ' + months + ' 个月  ' + days + ' 天  ' +
+                    hours + ' 小时  ' + minutes + ' 分钟  ' + seconds + ' 秒');
+                $('.loader').hide();
+            }
+
+            updateTimeDifference();
+            setInterval(updateTimeDifference, 1000);
+
+            // 初始化页面时检查 localStorage
+            var isRedirectSet = localStorage.getItem('redirectToMainSite');
+            if (isRedirectSet === 'true') {
+                document.getElementById('rememberRedirect').checked = true;
+                delayedRedirect(); // 如果已经勾选，则延迟跳转
+            }
+
+            // 添加延迟跳转和检查用户取消自动跳转
+            var redirectTimeout;
+            function delayedRedirect() {
+                redirectTimeout = setTimeout(function() {
+                    var isRedirectSet = localStorage.getItem('redirectToMainSite');
+                    if (isRedirectSet === 'true') {
+                        location.href = 'https://chat-1.myai.asia/';
+                    }
+                }, 2000); // 2秒延迟
+            }
+
+            delayedRedirect();
+
+            // 检查复选框状态以取消延迟跳转
+            document.getElementById('rememberRedirect').addEventListener('change', function() {
+                if (this.checked) {
+                    localStorage.setItem('redirectToMainSite', 'true');
+                    delayedRedirect(); // 重新启动延迟跳转
+                } else {
+                    localStorage.removeItem('redirectToMainSite');
+                    clearTimeout(redirectTimeout); // 取消延迟跳转
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="options">
+            <input type="checkbox" id="rememberRedirect" />
+            <label for="rememberRedirect">下次访问时自动跳转到主站</label>
+        </div>
+        <div class="time-container">
+            <h1>我的AI已保持服务</h1>
+            <div id="time-difference">
+                <span class="loader"></span> 加载中...
+            </div>
+        </div>
+        <div class="buttons">
+            <div class="button" onclick="location.href='https://chat-1.myai.asia/'">主用站(稳定)</div>
+            <div class="button" onclick="location.href='https://chat-1-0.myai.asia/'">主用站(备用)</div>
+            <div class="button" onclick="location.href='https://chat-2.myai.asia/'">测试站点(随时停止)</div>
+        </div>
+        <div class="test-text">
+            <p><h2>创新思想，与众不同</h2></p>
+            <p>主站点✅  主站点(备用)✅  测试站点✅</p>
+        </div>
+    </div>
+</body>
+</html>
