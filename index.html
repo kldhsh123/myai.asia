@@ -136,6 +136,17 @@
             updateTimeDifference();
             setInterval(updateTimeDifference, 1000);
 
+            // 获取名言API数据
+            fetch('https://v.api.aa1.cn/api/api-wenan-mingrenmingyan/index.php?aa1=json')
+                .then(response => response.json())
+                .then(data => {
+                    const mingrenmingyan = data.mingrenmingyan || '无名言数据';
+                    $('.footer').text(mingrenmingyan);
+                })
+                .catch(error => {
+                    console.error('Fetch Error:', error);
+                });
+
             // 初始化页面时检查 localStorage
             var isRedirectSet = localStorage.getItem('redirectToMainSite');
             if (isRedirectSet === 'true') {
@@ -182,7 +193,7 @@
             <div id="time-difference">
                 <span class="loader"></span> 加载中...
             </div>
-            <div class="footer">一切尽在我们的掌握之中</div>
+            <div class="footer">名言加载中...</div>
         </div>
         <div class="buttons">
             <div class="button" onclick="location.href='https://chat-1.myai.asia/'">主站点</div>
