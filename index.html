@@ -4,14 +4,11 @@
     <meta charset="UTF-8">
     <title>我的AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="免费AI,AI,ChatGPT,GPT,免费ChatGPT,免费GPT,公益AI,公益GPT,我的AI,KLGPT,开朗AI,开朗GPT"></meta>
+    <meta name="keywords" content="免费AI,AI,ChatGPT,GPT,免费ChatGPT,免费GPT,公益AI,公益GPT,我的AI,KLGPT,开朗AI,开朗GPT">
     <meta name="google-adsense-account" content="ca-pub-8730990556775078">
-    <meta name="description" content="免费纯公益ChatGPT，致力于公益项目。"></meta>
-    <script type="text/javascript" src="//api.tongjiniao.com/c?_=670791451614552064" async></script>
+    <meta name="description" content="免费纯公益ChatGPT，致力于公益项目。">
+    <script src="https://cdn.staticfile.net/jquery/3.7.1/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="https://krseoul.imgtbl.com/i/2024/07/01/66825b0a53d19.jpg">
-    <!-- 禁止未授权使用此样式! -->
-    <!-- 开朗的火山河123版权所有,盗版必究！ -->
-    <!-- 未授权使用死全家！ -->
     <style>
         body {
             background-image: url('https://krseoul.imgtbl.com/i/2024/07/11/668fa4e574104.png');
@@ -105,10 +102,6 @@
             margin-top: 10px;
         }
     </style>
-    <!-- 禁止未授权使用此代码! -->
-    <!-- 开朗的火山河123版权所有,盗版必究！ -->
-    <!-- 未授权使用死全家！ -->
-    <script src="https://cdn.staticfile.net/jquery/3.7.1/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
             function updateTimeDifference() {
@@ -137,10 +130,10 @@
             setInterval(updateTimeDifference, 1000);
 
             // 获取名言API数据
-            fetch('https://v.api.aa1.cn/api/api-wenan-mingrenmingyan/index.php?aa1=json')
-                .then(response => response.json())
+            fetch('https://v1.hitokoto.cn/?c=d&encode=text')
+                .then(response => response.text())
                 .then(data => {
-                    const mingrenmingyan = data.mingrenmingyan || '无名言数据';
+                    const mingrenmingyan = data || '无名言数据';
                     $('.footer').text(mingrenmingyan);
                 })
                 .catch(error => {
