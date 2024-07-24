@@ -129,7 +129,6 @@
             updateTimeDifference();
             setInterval(updateTimeDifference, 1000);
 
-            // 获取名言API数据
             fetch('https://v1.hitokoto.cn/?c=d&encode=text')
                 .then(response => response.text())
                 .then(data => {
@@ -140,14 +139,12 @@
                     console.error('Fetch Error:', error);
                 });
 
-            // 初始化页面时检查 localStorage
             var isRedirectSet = localStorage.getItem('redirectToMainSite');
             if (isRedirectSet === 'true') {
                 document.getElementById('rememberRedirect').checked = true;
-                delayedRedirect(); // 如果已经勾选，则延迟2秒跳转
+                delayedRedirect();
             }
 
-            // 检测部分
             var redirectTimeout;
             function delayedRedirect() {
                 redirectTimeout = setTimeout(function() {
@@ -155,19 +152,18 @@
                     if (isRedirectSet === 'true') {
                         location.href = 'https://chat-1.myai.asia/';
                     }
-                }, 2000); // 2秒延迟
+                }, 2000); 
             }
 
             delayedRedirect();
 
-            // 检查复选框状态以取消延迟跳转
             document.getElementById('rememberRedirect').addEventListener('change', function() {
                 if (this.checked) {
                     localStorage.setItem('redirectToMainSite', 'true');
-                    delayedRedirect(); // 重新启动延迟跳转
+                    delayedRedirect();
                 } else {
                     localStorage.removeItem('redirectToMainSite');
-                    clearTimeout(redirectTimeout); // 取消延迟跳转
+                    clearTimeout(redirectTimeout);
                 }
             });
         });
