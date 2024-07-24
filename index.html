@@ -132,7 +132,7 @@
             fetch('https://v1.hitokoto.cn/?c=d&encode=text')
                 .then(response => response.text())
                 .then(data => {
-                    const mingrenmingyan = data || '无名言数据';
+                    const mingrenmingyan = data || '名言获取失败';
                     $('.footer').text(mingrenmingyan);
                 })
                 .catch(error => {
@@ -180,7 +180,7 @@
         <div class="time-container">
             <h1>我的AI已保持服务</h1>
             <div id="time-difference">
-                <span class="loader"></span> 加载中...
+                <span class="loader"></span> 时间加载中...
             </div>
             <div class="footer">名言加载中...</div>
         </div>
