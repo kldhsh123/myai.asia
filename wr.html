@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="此域名已被神秘力量污染">
+    <title>警告</title>
+    <link rel="icon" href="http://cdn.kldhsh.top/klbk/202408/060e1725073751.png" type="image/png">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('https://cdn.kldhsh.top/klbk/202401/75a01706176704.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 40px;
+            max-width: 90%;
+            width: 500px;
+            position: relative;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: auto;
+        }
+        .icon {
+            font-size: 5em;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+        .title {
+            font-size: 2.5em;
+            margin: 0;
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .message {
+            font-size: 1.2em;
+            margin: 20px 0;
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        .info {
+            margin-top: 20px;
+            font-size: 1em;
+            text-align: left;
+            color: #ddd;
+        }
+        .info ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .info li {
+            margin-bottom: 15px;
+            padding-left: 20px;
+            position: relative;
+        }
+        .info li::before {
+            content: '•';
+            color: #ffcc00;
+            font-size: 1.2em;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #bbb;
+        }
+        .contact a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        .contact a:hover {
+            text-decoration: underline;
+        }
+        .countdown {
+            font-size: 1.5em;
+            color: #ffcc00;
+            margin-top: 20px;
+        }
+    </style>
+S
+    <script>
+        let countdown = 8;
+        function updateCountdown() {
+            document.getElementById('countdown').textContent = countdown;
+            if (countdown === 0) {
+                window.location.href = "https://myai.asia";
+            } else {
+                countdown--;
+                setTimeout(updateCountdown, 1000);
+            }
+        }
+        window.onload = function() {
+            updateCountdown();
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <img src="https://cdn.kldhsh.top/klbk/202403/7ff31709830844.png" alt="开朗科技CDN" class="logo"> 
+        <div class="icon">⚠️</div>
+        <div class="title">此站点域名已被污染</div>
+        <div class="message">您当前访问的域名已被污染，我们将在 <span id="countdown">8</span> 秒后自动为您跳转到引导站。请稍候...</div>
+        
+        <div class="info">
+            <div>说明：</div>
+            <ul>
+                <li>chat-1 域名已遭到神秘力量的污染。</li>
+                <li>目前我们已开放 chat-1-1，请前往引导站进行访问。</li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            by 开朗科技网络工作室<br>
+            联系邮箱：<a href="mailto:admin@kldhsh.top" style="color: #ffcc00;">admin@kldhsh.top</a>
+        </div>
+    </div>
+</body>
+</html>
