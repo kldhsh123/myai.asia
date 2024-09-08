@@ -101,6 +101,27 @@
             color: #999999;
             margin-top: 10px;
         }
+        /* Loading overlay style */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none; /* Hidden by default */
+        }
+        .loading-overlay .loader {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #3498db;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -121,9 +142,8 @@
                 timeDiff -= minutes * (1000 * 60);
                 var seconds = Math.floor(timeDiff / 1000);
 
-                $('#time-difference').text(' ' + years + ' 年  ' + months + ' 个月  ' + days + ' 天  ' +
+                $('#time-difference').html('<span class="loader"></span> ' + years + ' 年  ' + months + ' 个月  ' + days + ' 天  ' +
                     hours + ' 小时  ' + minutes + ' 分钟  ' + seconds + ' 秒');
-                $('.loader').hide();
             }
 
             updateTimeDifference();
@@ -139,32 +159,42 @@
                     console.error('Fetch Error:', error);
                 });
 
+            function showLoadingOverlay() {
+                $('.loading-overlay').show(); // Show loading overlay
+            }
+
+            function hideLoadingOverlay() {
+                $('.loading-overlay').hide(); // Hide loading overlay
+            }
+
+            function delayedRedirect(url) {
+                showLoadingOverlay();
+                setTimeout(function() {
+                    hideLoadingOverlay();
+                    location.href = url;
+                }, 2000); // Delay before redirecting
+            }
+
+            // Automatically redirect if the checkbox is checked
             var isRedirectSet = localStorage.getItem('redirectToMainSite');
             if (isRedirectSet === 'true') {
                 document.getElementById('rememberRedirect').checked = true;
-                delayedRedirect();
+                delayedRedirect('https://chat-1-1.myai.asia/');
             }
-
-            var redirectTimeout;
-            function delayedRedirect() {
-                redirectTimeout = setTimeout(function() {
-                    var isRedirectSet = localStorage.getItem('redirectToMainSite');
-                    if (isRedirectSet === 'true') {
-                        location.href = 'https://chat-1-1.myai.asia/';
-                    }
-                }, 2000); 
-            }
-
-            delayedRedirect();
 
             document.getElementById('rememberRedirect').addEventListener('change', function() {
                 if (this.checked) {
                     localStorage.setItem('redirectToMainSite', 'true');
-                    delayedRedirect();
+                    delayedRedirect('https://chat-1-1.myai.asia/');
                 } else {
                     localStorage.removeItem('redirectToMainSite');
-                    clearTimeout(redirectTimeout);
                 }
+            });
+
+            // Attach event listeners to buttons for manual redirection
+            $('.button').on('click', function() {
+                var url = $(this).attr('onclick').match(/'(.*?)'/)[1];
+                delayedRedirect(url);
             });
         });
     </script>
