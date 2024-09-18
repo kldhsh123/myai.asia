@@ -203,7 +203,12 @@
                 if (rememberRedirect) {
                     location.href = (language === 'zh') ? 'https://chat-1-1.myai.asia/' : 'https://chat-1-1-cf.myai.asia/';
                 }
-            }, 3000); // 延迟3秒
+            }, 3000);
+
+            // 页面加载时检查 cookie
+            if (rememberRedirect) {
+                updateRedirectButton();
+            }
 
             updateLanguage();
         });
