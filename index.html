@@ -170,69 +170,48 @@
                 timeDiff -= minutes * (1000 * 60);
                 var seconds = Math.floor(timeDiff / 1000);
 
-                $('#time-difference').text(' ' + years + (language === 'zh' ? ' 年  ' : ' years  ') + months + (language === 'zh' ? ' 个月  ' : ' months  ') + days + (language === 'zh' ? ' 天  ' : ' days  ') + hours + (language === 'zh' ? ' 小时  ' : ' hours  ') + minutes + (language === 'zh' ? ' 分钟  ' : ' minutes  ') + seconds + (language === 'zh' ? ' 秒' : ' seconds'));
-                $('.loader').hide();
+                $('#time-difference').text(`工作已持续 ${years} 年 ${months} 个月 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒`);
             }
 
+            updateLanguage();
             updateTimeDifference();
             setInterval(updateTimeDifference, 1000);
 
-            fetch('https://v1.hitokoto.cn/?c=d&encode=text')
-                .then(response => response.text())
-                .then(data => {
-                    const mingrenmingyan = data || '名言获取失败';
-                    $('#quote-text').text(mingrenmingyan);
-                })
-                .catch(error => {
-                    console.error('Fetch Error:', error);
-                });
-
-            $('#language-toggle').click(function() {
-                language = (language === 'zh') ? 'en' : 'zh';
-                updateLanguage();
-            });
-
-            $('#rememberRedirectButton').click(function() {
-                rememberRedirect = !rememberRedirect; // 切换状态
-                setCookie('redirectToMain', rememberRedirect ? 'true' : 'false', 7);
+            $('.redirect-button').click(function() {
+                rememberRedirect = !rememberRedirect;
+                setCookie('redirectToMain', rememberRedirect, 7);
                 updateRedirectButton();
             });
 
-            // 页面加载时检查 cookie
-            if (rememberRedirect) {
-                if (language === 'zh') {
-                    location.href = 'https://chat-1-1.myai.asia/'; // 中文跳转
-                } else {
-                    location.href = 'https://chat-1-1-cf.myai.asia/'; // 英文跳转
+            // 延迟 3 秒后执行跳转
+            setTimeout(function() {
+                if (rememberRedirect) {
+                    location.href = 'https://chat-1-1.myai.asia/';
                 }
-            }
-
-            updateLanguage(); // 初始调用
+            }, 3000);
         });
     </script>
 </head>
 <body>
     <div class="container">
-        <div class="options">
-            <button id="rememberRedirectButton" class="button redirect-button">下次访问时自动跳转到主站 [开启]</button>
-            <button id="language-toggle" class="button">切换语言 / Switch Language</button>
-        </div>
-        <div class="time-container">
-            <h1 id="header-title">我的AI已保持服务</h1>
-            <div id="time-difference">
-                <span class="loader"></span> 时间加载中...
-            </div>
-            <div id="quote-text" class="footer">名言加载中...</div>
-        </div>
-        <div class="buttons">
-            <div class="button button-main">主站点</div>
-            <div class="button button-help">帮助文档</div>
-            <div class="button button-group">加入Q群</div>
-            <div class="button button-test">测试站点</div>
-        </div>
+        <h1 id="header-title">我的AI已保持服务</h1>
         <div class="test-text">
-            <h2 class="innovative-text">创新思想，与众不同</h2>
-            <p class="status-text">主站点✅  帮助文档✅  测试站点✅</p>
+            <div id="quote-text">名言加载中...</div>
+        </div>
+        <div id="time-difference"></div>
+        <div class="buttons">
+            <button class="button button-main"></button>
+            <button class="button button-help"></button>
+            <button class="button button-group"></button>
+            <button class="button button-test"></button>
+        </div>
+        <div class="options">
+            <div class="checkbox-label">
+                <button class="button redirect-button"></button>
+            </div>
+        </div>
+        <div class="footer">
+            <p class="status-text"></p>
         </div>
     </div>
 </body>
