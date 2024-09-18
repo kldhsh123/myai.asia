@@ -89,7 +89,7 @@
             margin: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
-            border: none; /* 去除黑边 */
+            border: none;
         }
         .button:hover {
             background-color: rgba(255, 255, 255, 1);
@@ -145,11 +145,12 @@
                     $('.status-text').text('Main Site ✅  Help Document ✅  Test Site ✅');
                     $('.redirect-button').text('Auto redirect to main site next time [On]');
                 }
-                setCookie('language', language, 7); // 保存语言设置到cookie
+                setCookie('language', language, 7);
             }
 
             function updateRedirectButton() {
-                $('.redirect-button').text((language === 'zh' ? '下次访问时自动跳转到主站 [' : 'Auto redirect to main site next time [') + (rememberRedirect ? '开启' : '关闭') + ']');
+                const toggleText = rememberRedirect ? (language === 'zh' ? '开启' : 'On') : (language === 'zh' ? '关闭' : 'Off');
+                $('.redirect-button').text((language === 'zh' ? '下次访问时自动跳转到主站 [' : 'Auto redirect to main site next time [') + toggleText + ']');
             }
 
             function updateTimeDifference() {
