@@ -133,7 +133,6 @@
                     $('.button-test').text('测试站点').attr('onclick', "location.href='https://chat-2.myai.asia/'");
                     $('.innovative-text').text('创新思想，与众不同');
                     $('.status-text').text('主站点✅  帮助文档✅  测试站点✅');
-                    $('.redirect-button').text('下次访问时自动跳转到主站 [开启]');
                 } else {
                     $('#header-title').text('My AI has been serving');
                     $('#quote-text').text('Quote loading...');
@@ -143,7 +142,6 @@
                     $('.button-test').text('Test Site').attr('onclick', "location.href='https://chat-2.myai.asia/'");
                     $('.innovative-text').text('Innovative Thinking, Be Unique');
                     $('.status-text').text('Main Site ✅  Help Document ✅  Test Site ✅');
-                    $('.redirect-button').text('Auto redirect to main site next time [On]');
                 }
                 setCookie('language', language, 7);
             }
@@ -170,8 +168,7 @@
                 timeDiff -= minutes * (1000 * 60);
                 var seconds = Math.floor(timeDiff / 1000);
 
-                $('#time-difference').text(' ' + years + (language === 'zh' ? ' 年  ' : ' years  ') + months + (language === 'zh' ? ' 个月  ' : ' months  ') + days + (language === 'zh' ? ' 天  ' : ' days  ') + hours + (language === 'zh' ? ' 小时  ' : ' hours  ') + minutes + (language === 'zh' ? ' 分钟  ' : ' minutes  ') + seconds + (language === 'zh' ? ' 秒' : ' seconds'));
-                $('.loader').hide();
+                $('#time-difference').text(' ' + years + (language === 'zh' ? ' 年  ' : ' years  ') + months + (language === 'zh' ? ' 个月  ' : ' months  ') + days + (language === 'zh' ? ' 天 ' : ' days ') + hours + (language === 'zh' ? ' 时 ' : ' hours ') + minutes + (language === 'zh' ? ' 分 ' : ' minutes ') + seconds + (language === 'zh' ? ' 秒 ' : ' seconds '));
             }
 
             updateTimeDifference();
@@ -193,8 +190,8 @@
             });
 
             $('#rememberRedirectButton').click(function() {
-                rememberRedirect = !rememberRedirect;
-                setCookie('redirectToMain', rememberRedirect ? 'true' : 'false', 7);
+                rememberRedirect = !rememberRedirect; // 切换状态
+                setCookie('redirectToMain', rememberRedirect ? 'true' : 'false', 7); // 更新 Cookie
                 updateRedirectButton();
             });
 
