@@ -101,6 +101,18 @@
             color: #999999;
             margin-top: 10px;
         }
+        #language-toggle {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #language-toggle:hover {
+            background-color: #2980b9;
+        }
     </style>
     <script>
         $(document).ready(function() {
@@ -156,20 +168,19 @@
             fetch('https://v1.hitokoto.cn/?c=d&encode=text')
                 .then(response => response.text())
                 .then(data => {
-                    const mingrenmingyan = data || (language === 'zh' ? '名言获取失败' : 'Quote fetching failed');
+                    const mingrenmingyan = data || '名言获取失败';
                     $('#quote-text').text(mingrenmingyan);
                 })
                 .catch(error => {
                     console.error('Fetch Error:', error);
                 });
 
-            updateLanguage();
-
-            // 语言切换按钮
             $('#language-toggle').click(function() {
                 language = (language === 'zh') ? 'en' : 'zh';
                 updateLanguage();
             });
+
+            updateLanguage(); // 初始调用
         });
     </script>
 </head>
@@ -180,7 +191,7 @@
                 <input type="checkbox" id="rememberRedirect" />
                 <label for="rememberRedirect">下次访问时自动跳转到主站 / Auto redirect to main site next time</label>
             </div>
-            <button id="language-toggle" style="margin-top: 10px;">切换语言 / Switch Language</button>
+            <button id="language-toggle">切换语言 / Switch Language</button>
         </div>
         <div class="time-container">
             <h1 id="header-title">我的AI已保持服务</h1>
