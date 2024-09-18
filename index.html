@@ -109,18 +109,22 @@
             function updateLanguage() {
                 if (language === 'zh') {
                     $('#header-title').text('我的AI已保持服务');
-                    $('.footer').text(mingrenmingyan);
+                    $('#quote-text').text('名言加载中...');
                     $('.button-main').text('主站点');
                     $('.button-help').text('帮助文档');
                     $('.button-group').text('加入Q群');
                     $('.button-test').text('测试站点');
+                    $('.innovative-text').text('创新思想，与众不同');
+                    $('.status-text').text('主站点✅  帮助文档✅  测试站点✅');
                 } else {
                     $('#header-title').text('My AI has been serving');
-                    $('.footer').text(mingrenmingyan);
+                    $('#quote-text').text('Quote loading...');
                     $('.button-main').text('Main Site');
                     $('.button-help').text('Help Document');
                     $('.button-group').text('Join QQ Group');
                     $('.button-test').text('Test Site');
+                    $('.innovative-text').text('Innovative Thinking, Be Unique');
+                    $('.status-text').text('Main Site ✅  Help Document ✅  Test Site ✅');
                 }
             }
 
@@ -141,7 +145,6 @@
                 timeDiff -= minutes * (1000 * 60);
                 var seconds = Math.floor(timeDiff / 1000);
 
-                // 更新时间差文本
                 $('#time-difference').text(' ' + years + (language === 'zh' ? ' 年  ' : ' years  ') + months + (language === 'zh' ? ' 个月  ' : ' months  ') + days + (language === 'zh' ? ' 天  ' : ' days  ') + hours + (language === 'zh' ? ' 小时  ' : ' hours  ') + minutes + (language === 'zh' ? ' 分钟  ' : ' minutes  ') + seconds + (language === 'zh' ? ' 秒' : ' seconds'));
                 $('.loader').hide();
             }
@@ -153,7 +156,7 @@
                 .then(response => response.text())
                 .then(data => {
                     const mingrenmingyan = data || (language === 'zh' ? '名言获取失败' : 'Quote fetching failed');
-                    $('.footer').text(mingrenmingyan);
+                    $('#quote-text').text(mingrenmingyan);
                 })
                 .catch(error => {
                     console.error('Fetch Error:', error);
@@ -180,7 +183,7 @@
             <div id="time-difference">
                 <span class="loader"></span> 时间加载中...
             </div>
-            <div class="footer">名言加载中...</div>
+            <div class="footer" id="quote-text">名言加载中...</div>
         </div>
         <div class="buttons">
             <div class="button button-main" onclick="location.href='https://chat-1-1.myai.asia/'">主站点</div>
@@ -189,9 +192,8 @@
             <div class="button button-test" onclick="location.href='https://chat-2.myai.asia/'">测试站点</div>
         </div>
         <div class="test-text">
-            <p><h2>创新思想，与众不同 / Innovative Thinking, Be Unique</h2></p>
-            <p>Q群330316577</p>
-            <p>主站点✅  帮助文档✅  测试站点✅ / Main Site ✅  Help Document ✅  Test Site ✅</p>
+            <p><h2 class="innovative-text">创新思想，与众不同</h2></p>
+            <p class="status-text">Q群330316577</p>
         </div>
     </div>
 </body>
