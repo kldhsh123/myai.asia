@@ -25,7 +25,7 @@
         }
         .container {
             text-align: center;
-            background-color: rgba(255, 255, 255, 0.5);
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -35,19 +35,17 @@
             margin-top: 20px;
             margin-bottom: 20px;
         }
-        .time-container, .test-text, .buttons {
-            background-color: rgba(255, 255, 255, 0.7);
+        .options, .time-container, .test-text, .buttons {
+            background-color: rgba(255, 255, 255, 1);
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(5px);
             margin-bottom: 20px;
         }
         .options {
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
         }
         h1 {
             font-size: 24px;
@@ -84,16 +82,17 @@
             justify-content: center; 
         }
         .button {
-            background-color: rgba(255, 255, 255, 0.7);
+            background-color: rgba(255, 255, 255, 0.9);
             padding: 10px 20px;
             border-radius: 5px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             margin: 10px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            border: none; /* 去除黑边 */
         }
         .button:hover {
-            background-color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 1);
             transform: scale(1.05);
         }
         .footer {
@@ -101,28 +100,28 @@
             color: #999999;
             margin-top: 10px;
         }
-        /* 改进切换语言按钮样式 */
-        #language-toggle {
-            background-color: #4CAF50; /* 绿色背景 */
-            color: white; /* 白色字体 */
-            font-weight: bold;
-            padding: 10px 20px;
-            border-radius: 5px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            margin: 10px 0; /* 增加上下边距 */
-            width: 100%; /* 使按钮宽度占满 */
-        }
-        #language-toggle:hover {
-            background-color: #45a049; /* 深绿色背景 */
-            transform: scale(1.05);
+        .checkbox-label {
+            margin: 10px 0;
         }
     </style>
     <script>
         $(document).ready(function() {
-            var language = navigator.language || navigator.userLanguage; // 获取浏览器语言
-            language = (language.startsWith('zh')) ? 'zh' : 'en'; // 判断是否为中文
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`); 
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            function setCookie(name, value, days) {
+                const d = new Date();
+                d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+                const expires = "expires=" + d.toUTCString();
+                document.cookie = `${name}=${value}; ${expires}; path=/`;
+            }
+
+            var language = getCookie('language') || (navigator.language.startsWith('zh') ? 'zh' : 'en');
+            var rememberRedirect = getCookie('redirectToMain') === 'true';
+            updateRedirectButton();
 
             function updateLanguage() {
                 if (language === 'zh') {
@@ -134,6 +133,7 @@
                     $('.button-test').text('测试站点').attr('onclick', "location.href='https://chat-2.myai.asia/'");
                     $('.innovative-text').text('创新思想，与众不同');
                     $('.status-text').text('主站点✅  帮助文档✅  测试站点✅');
+                    $('.redirect-button').text('下次访问时自动跳转到主站 [开启]');
                 } else {
                     $('#header-title').text('My AI has been serving');
                     $('#quote-text').text('Quote loading...');
@@ -143,7 +143,13 @@
                     $('.button-test').text('Test Site').attr('onclick', "location.href='https://chat-2.myai.asia/'");
                     $('.innovative-text').text('Innovative Thinking, Be Unique');
                     $('.status-text').text('Main Site ✅  Help Document ✅  Test Site ✅');
+                    $('.redirect-button').text('Auto redirect to main site next time [On]');
                 }
+                setCookie('language', language, 7); // 保存语言设置到cookie
+            }
+
+            function updateRedirectButton() {
+                $('.redirect-button').text((language === 'zh' ? '下次访问时自动跳转到主站 [' : 'Auto redirect to main site next time [') + (rememberRedirect ? '开启' : '关闭') + ']');
             }
 
             function updateTimeDifference() {
@@ -185,6 +191,21 @@
                 updateLanguage();
             });
 
+            $('#rememberRedirectButton').click(function() {
+                rememberRedirect = !rememberRedirect; // 切换状态
+                setCookie('redirectToMain', rememberRedirect ? 'true' : 'false', 7);
+                updateRedirectButton();
+            });
+
+            // 页面加载时检查 cookie
+            if (rememberRedirect) {
+                if (language === 'zh') {
+                    location.href = 'https://chat-1-1.myai.asia/'; // 中文跳转
+                } else {
+                    location.href = 'https://chat-1-1-cf.myai.asia/'; // 英文跳转
+                }
+            }
+
             updateLanguage(); // 初始调用
         });
     </script>
@@ -192,9 +213,8 @@
 <body>
     <div class="container">
         <div class="options">
-            <input type="checkbox" id="rememberRedirect" />
-            <label for="rememberRedirect">下次访问时自动跳转到主站 / Auto redirect to main site next time</label>
-            <button id="language-toggle">切换语言 / Switch Language</button>
+            <button id="rememberRedirectButton" class="button redirect-button">下次访问时自动跳转到主站 [开启]</button>
+            <button id="language-toggle" class="button">切换语言 / Switch Language</button>
         </div>
         <div class="time-container">
             <h1 id="header-title">我的AI已保持服务</h1>
