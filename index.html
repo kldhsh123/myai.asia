@@ -164,6 +164,12 @@
                 });
 
             updateLanguage();
+
+            // 语言切换按钮
+            $('#language-toggle').click(function() {
+                language = (language === 'zh') ? 'en' : 'zh';
+                updateLanguage();
+            });
         });
     </script>
 </head>
@@ -174,6 +180,7 @@
                 <input type="checkbox" id="rememberRedirect" />
                 <label for="rememberRedirect">下次访问时自动跳转到主站 / Auto redirect to main site next time</label>
             </div>
+            <button id="language-toggle" style="margin-top: 10px;">切换语言 / Switch Language</button>
         </div>
         <div class="time-container">
             <h1 id="header-title">我的AI已保持服务</h1>
