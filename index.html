@@ -2,11 +2,11 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>我的AI</title>
+    <title>我的AI / My AI</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="免费AI,AI,ChatGPT,GPT,免费ChatGPT,免费GPT,公益AI,公益GPT,我的AI,KLGPT,开朗AI,开朗GPT">
     <meta name="google-adsense-account" content="ca-pub-8730990556775078">
-    <meta name="description" content="免费纯公益ChatGPT，致力于公益项目。">
+    <meta name="description" content="免费纯公益ChatGPT，致力于公益项目。Free public ChatGPT dedicated to charity projects.">
     <script type="text/javascript" src="//api.tongjiniao.com/c?_=670791451614552064" async></script>
     <script src="https://cdn.staticfile.net/jquery/3.7.1/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="https://krseoul.imgtbl.com/i/2024/07/01/66825b0a53d19.jpg">
@@ -105,6 +105,28 @@
     </style>
     <script>
         $(document).ready(function() {
+            var language = 'zh'; // 默认语言为中文
+
+            function updateLanguage() {
+                if (language === 'zh') {
+                    $('#header-title').text('我的AI已保持服务');
+                    $('#time-difference').text(' ' + years + ' 年  ' + months + ' 个月  ' + days + ' 天  ' + hours + ' 小时  ' + minutes + ' 分钟  ' + seconds + ' 秒');
+                    $('.footer').text(mingrenmingyan);
+                    $('.button-main').text('主站点');
+                    $('.button-help').text('帮助文档');
+                    $('.button-group').text('加入Q群');
+                    $('.button-test').text('测试站点');
+                } else {
+                    $('#header-title').text('My AI has been serving');
+                    $('#time-difference').text(' ' + years + ' years  ' + months + ' months  ' + days + ' days  ' + hours + ' hours  ' + minutes + ' minutes  ' + seconds + ' seconds');
+                    $('.footer').text(mingrenmingyan);
+                    $('.button-main').text('Main Site');
+                    $('.button-help').text('Help Document');
+                    $('.button-group').text('Join QQ Group');
+                    $('.button-test').text('Test Site');
+                }
+            }
+
             function updateTimeDifference() {
                 var studioCreatedDate = new Date('2024-05-21');
                 var currentDate = new Date();
@@ -122,8 +144,8 @@
                 timeDiff -= minutes * (1000 * 60);
                 var seconds = Math.floor(timeDiff / 1000);
 
-                $('#time-difference').text(' ' + years + ' 年  ' + months + ' 个月  ' + days + ' 天  ' +
-                    hours + ' 小时  ' + minutes + ' 分钟  ' + seconds + ' 秒');
+                updateLanguage();
+                $('#time-difference').text(' ' + years + ' 年  ' + months + ' 个月  ' + days + ' 天  ' + hours + ' 小时  ' + minutes + ' 分钟  ' + seconds + ' 秒');
                 $('.loader').hide();
             }
 
@@ -133,39 +155,16 @@
             fetch('https://v1.hitokoto.cn/?c=d&encode=text')
                 .then(response => response.text())
                 .then(data => {
-                    const mingrenmingyan = data || '名言获取失败';
+                    const mingrenmingyan = data || (language === 'zh' ? '名言获取失败' : 'Quote fetching failed');
                     $('.footer').text(mingrenmingyan);
                 })
                 .catch(error => {
                     console.error('Fetch Error:', error);
                 });
 
-            var isRedirectSet = localStorage.getItem('redirectToMainSite');
-            if (isRedirectSet === 'true') {
-                document.getElementById('rememberRedirect').checked = true;
-                delayedRedirect();
-            }
-
-            var redirectTimeout;
-            function delayedRedirect() {
-                redirectTimeout = setTimeout(function() {
-                    var isRedirectSet = localStorage.getItem('redirectToMainSite');
-                    if (isRedirectSet === 'true') {
-                        location.href = 'https://chat-1-1.myai.asia/';
-                    }
-                }, 2000); 
-            }
-
-            delayedRedirect();
-
-            document.getElementById('rememberRedirect').addEventListener('change', function() {
-                if (this.checked) {
-                    localStorage.setItem('redirectToMainSite', 'true');
-                    delayedRedirect();
-                } else {
-                    localStorage.removeItem('redirectToMainSite');
-                    clearTimeout(redirectTimeout);
-                }
+            $('#language-toggle').click(function() {
+                language = language === 'zh' ? 'en' : 'zh'; // 切换语言
+                updateLanguage();
             });
         });
     </script>
@@ -175,26 +174,27 @@
         <div class="options">
             <div class="options-inner">
                 <input type="checkbox" id="rememberRedirect" />
-                <label for="rememberRedirect">下次访问时自动跳转到主站</label>
+                <label for="rememberRedirect">下次访问时自动跳转到主站 / Automatically redirect to main site next time</label>
             </div>
+            <div class="button" id="language-toggle" style="margin-top: 10px; cursor: pointer;">切换语言 / Switch Language</div>
         </div>
         <div class="time-container">
-              <h1>我的AI已保持服务</h1>
+            <h1 id="header-title">我的AI已保持服务</h1>
             <div id="time-difference">
                 <span class="loader"></span> 时间加载中...
             </div>
             <div class="footer">名言加载中...</div>
         </div>
         <div class="buttons">
-            <div class="button" onclick="location.href='https://chat-1-1.myai.asia/'">主站点</div>
-            <div class="button" onclick="location.href='https://www.myai.asia/help.html'">帮助文档</div>
-            <div class="button" onclick="location.href='https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=vFOh8aTsWPbQsv7ckU8-Rih9w-N6PFom&authKey=uzWNwmUSGD32aKVIGINOAcDrx0BC2I7uPz1mIMsM%2B5yygh8FIrDh7DMkRFQV2j4x8&noverify=0&group_code=330316577'">加入Q群</div>
-            <div class="button" onclick="location.href='https://chat-2.myai.asia/'">测试站点</div>
+            <div class="button button-main" onclick="location.href='https://chat-1-1.myai.asia/'">主站点</div>
+            <div class="button button-help" onclick="location.href='https://www.myai.asia/help.html'">帮助文档</div>
+            <div class="button button-group" onclick="location.href='https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=vFOh8aTsWPbQsv7ckU8-Rih9w-N6PFom&authKey=uzWNwmUSGD32aKVIGINOAcDrx0BC2I7uPz1mIMsM%2B5yygh8FIrDh7DMkRFQV2j4x8&noverify=0&group_code=330316577'">加入Q群</div>
+            <div class="button button-test" onclick="location.href='https://chat-2.myai.asia/'">测试站点</div>
         </div>
         <div class="test-text">
-            <p><h2>创新思想，与众不同</h2></p>
+            <p><h2>创新思想，与众不同 / Innovative Thinking, Be Unique</h2></p>
             <p>Q群330316577</p>
-            <p>主站点✅  帮助文档✅  测试站点✅</p>
+            <p>主站点✅  帮助文档✅  测试站点✅ / Main Site ✅  Help Document ✅  Test Site ✅</p>
         </div>
     </div>
 </body>
