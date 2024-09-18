@@ -104,7 +104,8 @@
     </style>
     <script>
         $(document).ready(function() {
-            var language = 'zh'; // 默认语言为中文
+            var language = navigator.language || navigator.userLanguage; // 获取浏览器语言
+            language = (language.startsWith('zh')) ? 'zh' : 'en'; // 判断是否为中文
 
             function updateLanguage() {
                 if (language === 'zh') {
@@ -163,9 +164,11 @@
                 });
 
             $('#language-toggle').click(function() {
-                language = language === 'zh' ? 'en' : 'zh'; // 切换语言
+                language = (language === 'zh') ? 'en' : 'zh'; // 切换语言
                 updateLanguage();
             });
+
+            updateLanguage(); // 初始化时更新语言
         });
     </script>
 </head>
@@ -193,7 +196,7 @@
         </div>
         <div class="test-text">
             <p><h2 class="innovative-text">创新思想，与众不同</h2></p>
-            <p class="status-text">Q群330316577</p>
+            <p class="status-text">主站点✅  帮助文档✅  测试站点✅</p>
         </div>
     </div>
 </body>
