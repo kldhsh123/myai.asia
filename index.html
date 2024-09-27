@@ -130,8 +130,8 @@
                     $('.button-main').text('主站点').attr('onclick', "location.href='https://chat-1-1.myai.asia/'");
                     $('.button-help').text('帮助文档').attr('onclick', "location.href='https://www.myai.asia/help.html'");
                     $('.button-group').text('加入Q群').attr('onclick', "window.open('https://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=vFOh8aTsWPbQsv7ckU8-Rih9w-N6PFom&authKey=uzWNwmUSGD32aKVIGINOAcDrx0BC2I7uPz1mIMsM%2B5yygh8FIrDh7DMkRFQV2j4x8&noverify=0&group_code=330316577', '_blank')");
-                    $('.button-test').text('心理咨询').attr('onclick', "location.href='https://xldc.myai.asia/'"
                     $('.button-test').text('测试站点').attr('onclick', "location.href='https://chat-2.myai.asia/'");
+                    $('.button-counseling').show().attr('onclick', "location.href='https://xldc.myai.asia/'");
                     $('.innovative-text').text('创新思想，与众不同');
                     $('.status-text').text('主站点✅  帮助文档✅  测试站点✅');
                 } else {
@@ -141,7 +141,8 @@
                     $('.button-help').text('Help Document').attr('onclick', "location.href='https://www.myai.asia/help-en.html'");
                     $('.button-group').text('Join Discord Group').attr('onclick', "window.open('https://discord.gg/CKrvgCyK4y', '_blank')");
                     $('.button-test').text('Test Site').attr('onclick', "location.href='https://chat-2-cf.myai.asia/'");
-                    $('.innovative-text').text('Innovative Thinking, Be Unique');
+                    $('.button-counseling').hide();
+                    $('.innovative-Atext').text('Innovative Thinking, Be Unique');
                     $('.status-text').text('Main Site ✅  Help Document ✅  Test Site ✅');
                 }
                 setCookie('language', language, 7);
@@ -191,19 +192,17 @@
             });
 
             $('#rememberRedirectButton').click(function() {
-                rememberRedirect = !rememberRedirect; // 切换状态
-                setCookie('redirectToMain', rememberRedirect ? 'true' : 'false', 7); // 更新 Cookie
+                rememberRedirect = !rememberRedirect; 
+                setCookie('redirectToMain', rememberRedirect ? 'true' : 'false', 7); 
                 updateRedirectButton();
             });
 
-            // 延迟 3 秒后执行跳转
             setTimeout(function() {
                 if (rememberRedirect) {
                     location.href = (language === 'zh') ? 'https://chat-1-1.myai.asia/' : 'https://chat-1-1-cf.myai.asia/';
                 }
             }, 3000);
 
-            // 页面加载时检查 cookie
             if (rememberRedirect) {
                 updateRedirectButton();
             }
@@ -230,6 +229,7 @@
             <div class="button button-help">帮助文档</div>
             <div class="button button-group">加入Q群</div>
             <div class="button button-test">测试站点</div>
+            <div class="button button-counseling" style="display: none;">心理咨询</div>
         </div>
         <div class="test-text">
             <h2 class="innovative-text">创新思想，与众不同</h2>
